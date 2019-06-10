@@ -5,8 +5,6 @@ public class ReverseInteger {
         long n = 0;     //此处定义为long类型
         int[] result = new int[32];
         int count = 0;
-        boolean isPositive = false;
-        if (x >= 0) isPositive = true;
         while (x != 0) {
             result[count++] = x % 10;
             x = x / 10;
@@ -33,6 +31,6 @@ public class ReverseInteger {
     }
 
     public static void main(String[] args) {
-        System.out.println(reverse(1534236469));
+        System.out.println(reverse(-321));
     }
 }
