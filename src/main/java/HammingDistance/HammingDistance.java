@@ -1,11 +1,16 @@
 package HammingDistance;
 
 public class HammingDistance {
-//    public int hammingDistance(int x, int y) {
-//        int i = x ^ y;
-//    }
-
-    public static void main(String[] args) {
-        System.out.println(1 ^ 4);
+    public int hammingDistance(int x, int y) {
+        int value = x ^ y;
+        int count = 0;
+        while (value != 0) {
+            if ((value & 1) == 1) {
+                count++;
+            }
+            value = value >> 1;
+        }
+        return count;
     }
+
 }
