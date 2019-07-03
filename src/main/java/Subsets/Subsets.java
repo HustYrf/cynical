@@ -16,10 +16,11 @@ public class Subsets {
 
     private void dfs(List<List<Integer>> result, int start, List<Integer> cur, int[] nums) {
         result.add(new ArrayList<>(cur));
-        for (int i = start; i < nums.length; i++) {
+        for (int i = start; i < nums.length; ) {
             cur.add(Integer.valueOf(nums[i]));
             dfs(result, i + 1, cur, nums);
             cur.remove(cur.size() - 1);
+            i++;        //便于调试
         }
     }
 
