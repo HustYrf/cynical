@@ -42,31 +42,27 @@ public class LRUCache {
         if (doubleNode == null) {
             return -1;
         }
-        removeExistNode(doubleNode);
-        addNodeToTail(doubleNode);
         return doubleNode.value;
     }
 
     public void put(int key, int value) {
         DoubleNode node = new DoubleNode(key, value);
         DoubleNode doubleNode = getDoubleNode(key);
-
         if (doubleNode == null) { //如果不存在
             map.put(key, node);
             addNodeToTail(node);
             size++;
             removeHeadNode(size);
         } else {   //之前就已经存在,更新node，value
-            removeExistNode(doubleNode);
             doubleNode.value = value;
-            addNodeToTail(doubleNode);
         }
     }
 
     private void removeHeadNode(int size) {
         if (size > len) {  //长度超标了，需要移除头节点
             DoubleNode headCopy = head;
-            removeExistNode(head);
+            head = head.next;
+            head.pre = null;
             size--;
             map.remove(headCopy.key);
         }
@@ -77,17 +73,17 @@ public class LRUCache {
         if (doubleNode == null) {
             return null;
         }
-        return doubleNode;
-    }
-
-    private void removeExistNode(DoubleNode node) {
-        if (node == head) {
-            head = head.next;
-            head.pre = null;
-        } else {
-            node.next.pre = node.pre;
-            node.pre.next = node.next;
+        if (doubleNode != tail) {
+            if (doubleNode == head) {
+                head = head.next;
+                head.pre = null;
+            } else {
+                doubleNode.next.pre = doubleNode.pre;
+                doubleNode.pre.next = doubleNode.next;
+            }
+            addNodeToTail(doubleNode);
         }
+        return doubleNode;
     }
 
     private void addNodeToTail(DoubleNode node) {
