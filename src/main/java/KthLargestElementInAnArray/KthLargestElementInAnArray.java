@@ -17,9 +17,30 @@ import java.util.PriorityQueue;
  * Output: 4
  */
 public class KthLargestElementInAnArray {
+    /** Hash思想 */
     public int findKthLargest(int[] nums, int k) {
-        Arrays.sort(nums);
-        return nums[nums.length - k];
+        if (nums == null || nums.length == 0) return Integer.MAX_VALUE;
+        int max = nums[0], min = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) max = nums[i];
+            if (nums[i] < min) min = nums[i];
+        }
+        int[] arr = new int[max - min + 1];
+        for (int n : nums) arr[max - n]++;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (sum >= k) {
+                return max - i;
+            }
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        KthLargestElementInAnArray k = new KthLargestElementInAnArray();
+        int[] nums = new int[]{3, 2, 1, 5, 6, 4};
+        System.out.println(k.findKthLargest(nums, 2));
     }
 }
 
