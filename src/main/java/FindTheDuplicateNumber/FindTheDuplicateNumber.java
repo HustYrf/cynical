@@ -25,14 +25,13 @@ package FindTheDuplicateNumber;
 // 数组中的每个数的值都在1到n之间，并且整个数组的长度为n+1
 
 
-
-    //leetcode 上面的高赞解答，类似于链表循环上2，也是双指针解题法，一个快指针，一个慢指针。
+//leetcode 上面的高赞解答，类似于链表循环上2，也是双指针解题法，一个快指针，一个慢指针。
 public class FindTheDuplicateNumber {
     public int findDuplicate(int[] nums) {
         int len = nums.length;
         if (len == 0) return -1;
-        int slow = nums[0];
-        int fast = nums[nums[0]];
+        int slow = nums[0];      //定义一个快指针
+        int fast = nums[nums[0]]; //定义一个慢指针
         while (slow != fast) {
             slow = nums[slow];
             fast = nums[nums[fast]];
