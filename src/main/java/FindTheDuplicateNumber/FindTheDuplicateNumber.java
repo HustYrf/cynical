@@ -30,8 +30,8 @@ public class FindTheDuplicateNumber {
     public int findDuplicate(int[] nums) {
         int len = nums.length;
         if (len == 0) return -1;
-        int slow = nums[0];      //定义一个快指针
-        int fast = nums[nums[0]]; //定义一个慢指针
+        int slow = nums[0];      //定义一个慢指针
+        int fast = nums[nums[0]]; //定义一个快指针，此处需要注意
         while (slow != fast) {
             slow = nums[slow];
             fast = nums[nums[fast]];
